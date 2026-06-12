@@ -1,4 +1,3 @@
-
 // ======================
 // IMPORT FIREBASE
 // ======================
@@ -52,10 +51,14 @@ function gisLoaded() {
         client_id: CLIENT_ID,
         scope: SCOPES,
         callback: (tokenResponse) => {
+
             if (tokenResponse.error) {
                 console.error(tokenResponse);
                 return;
             }
+
+            // 🔥 IMPORTANT FIX
+            gapi.client.setToken(tokenResponse);
 
             document.getElementById("loginButton").style.display = "none";
 
@@ -72,8 +75,7 @@ function handleLogin() {
     tokenClient.requestAccessToken({ prompt: "consent" });
 }
 
-
-// expose login button for inline HTML button
+// expose for HTML button
 window.handleLogin = handleLogin;
 
 
@@ -150,26 +152,22 @@ async function removeMoney() {
 
 
 // ======================
-// BUTTON SETUP + STARTUP
+// STARTUP
 // ======================
 window.addEventListener("load", () => {
 
-    // calendar + firebase init
     gapiLoaded();
     gisLoaded();
 
-    // login button UI
     document.getElementById("loginButton").innerHTML = `
         <button onclick="handleLogin()">Sign in with Google</button>
     `;
 
-    // balance buttons
     document.getElementById("addBtn")
         .addEventListener("click", addMoney);
 
     document.getElementById("removeBtn")
         .addEventListener("click", removeMoney);
 
-    // initial balance load
     loadBalance();
 });
