@@ -5,35 +5,44 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 20px;
-    background: #f5f5f5;
+    background: #eef2f7;
+    color: #111;
 }
 
 /* ======================
    NAVIGATION
 ====================== */
 nav {
-    background: #222;
-    padding: 10px;
-    border-radius: 10px;
+    background: #1f2937;
+    padding: 12px;
+    border-radius: 12px;
     margin-bottom: 20px;
+
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
 nav a {
     color: white;
-    margin: 0 10px;
     text-decoration: none;
     font-weight: bold;
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition: 0.2s;
 }
 
 nav a:hover {
-    color: #0078d7;
+    background: #374151;
 }
 
 /* ======================
    MAIN TEXT / CLOCK
 ====================== */
 h1 {
-    color: #222;
+    color: #111827;
+    text-align: center;
 }
 
 .clock-container {
@@ -43,16 +52,19 @@ h1 {
 
 #clock {
     font-size: 3rem;
+    font-weight: bold;
 }
 
 #date {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    color: #4b5563;
 }
 
 /* ======================
    LOGIN AREA
 ====================== */
-#userInfo {
+#loginButton {
+    text-align: center;
     margin-top: 20px;
 }
 
@@ -63,13 +75,17 @@ h1 {
     background: white;
     padding: 12px;
     margin: 10px 0;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    text-align: left;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: 0.2s;
+}
+
+.event-card:hover {
+    transform: translateY(-2px);
 }
 
 /* ======================
-   CALENDAR WINDOW (TOP LEFT)
+   CALENDAR WINDOW
 ====================== */
 .calendar-window {
     position: fixed;
@@ -77,38 +93,33 @@ h1 {
     left: 20px;
 
     width: 320px;
-    height: 400px;
+    height: 420px;
 
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
 
     display: flex;
     flex-direction: column;
-
     overflow: hidden;
     z-index: 1000;
 }
 
-/* window title bar */
 .window-header {
-    background: #4285F4;
+    background: #2563eb;
     color: white;
-    padding: 10px;
+    padding: 12px;
     font-weight: bold;
 }
 
-/* scrollable content area */
 .window-content {
     padding: 10px;
     overflow-y: auto;
 }
 
-#loginButton {
-    text-align: center;
-    margin-top: 20px;
-}
-
+/* ======================
+   BALANCE WINDOW
+====================== */
 .balance-window {
     position: fixed;
     top: 70px;
@@ -117,14 +128,14 @@ h1 {
     width: 280px;
 
     background: white;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
 
     overflow: hidden;
 }
 
 .balance-display {
-    font-size: 24px;
+    font-size: 26px;
     padding: 15px;
     text-align: center;
     font-weight: bold;
@@ -133,28 +144,43 @@ h1 {
 .balance-controls {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 10px;
+    gap: 10px;
+    padding: 12px;
 }
 
 .balance-controls input {
-    padding: 8px;
+    padding: 10px;
     font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    outline: none;
 }
 
-.balance-controls button {
-    padding: 8px;
+.balance-controls input:focus {
+    border-color: #2563eb;
+}
+
+/* ======================
+   BUTTONS
+====================== */
+button {
+    padding: 10px;
     cursor: pointer;
     border: none;
-    border-radius: 6px;
-    background: #4285F4;
+    border-radius: 8px;
+    background: #2563eb;
     color: white;
+    font-weight: bold;
+    transition: 0.2s;
 }
 
-.balance-controls button:hover {
-    background: #2f6fe0;
+button:hover {
+    background: #1d4ed8;
 }
 
+/* ======================
+   MOBILE
+====================== */
 @media (max-width: 768px) {
 
     body {
@@ -166,25 +192,19 @@ h1 {
         position: static;
         width: 100%;
         margin-top: 15px;
-    }
-
-    .event-card {
-        width: 100%;
+        height: auto;
     }
 
     nav {
-        display: flex;
         flex-direction: column;
-        gap: 10px;
-        text-align: center;
+        align-items: center;
     }
 
     #clock {
         font-size: 2rem;
     }
-}
 
-.calendar-window,
-.balance-window {
-    max-width: 400px;
+    .balance-display {
+        font-size: 22px;
+    }
 }
