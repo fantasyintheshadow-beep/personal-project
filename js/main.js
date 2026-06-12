@@ -47,9 +47,11 @@ async function initializeGapiClient() {
 
 // Google Identity Services init
 function gisLoaded() {
+
     tokenClient = google.accounts.oauth2.initTokenClient({
         client_id: CLIENT_ID,
         scope: SCOPES,
+
         callback: (tokenResponse) => {
 
             if (tokenResponse.error) {
@@ -57,14 +59,23 @@ function gisLoaded() {
                 return;
             }
 
-            // 🔥 IMPORTANT FIX
+            // SAVE TOKEN
             gapi.client.setToken(tokenResponse);
 
+            // hide login button
             document.getElementById("loginButton").style.display = "none";
 
             listUpcomingEvents();
         },
     });
+
+    // 🟢 CHECK IF USER IS ALREADY LOGGED IN
+    const existingToken = gapi.client.getToken();
+
+    if (existingToken) {
+        document.getElementById("loginButton").style.display = "none";
+        listUpcomingEvents();
+    }
 }
 
 
@@ -75,7 +86,6 @@ function handleLogin() {
     tokenClient.requestAccessToken({ prompt: "consent" });
 }
 
-// expose for HTML button
 window.handleLogin = handleLogin;
 
 
@@ -83,6 +93,7 @@ window.handleLogin = handleLogin;
 // GOOGLE CALENDAR EVENTS
 // ======================
 async function listUpcomingEvents() {
+
     let response = await gapi.client.calendar.events.list({
         calendarId: "primary",
         timeMin: new Date().toISOString(),
