@@ -59,10 +59,8 @@ function gisLoaded() {
                 return;
             }
 
-            // store token
             gapi.client.setToken(tokenResponse);
 
-            // hide login button safely
             const btn = document.getElementById("loginButton");
             if (btn) btn.style.display = "none";
 
@@ -73,7 +71,7 @@ function gisLoaded() {
 
 
 // ======================
-// LOGIN BUTTON
+// LOGIN
 // ======================
 function handleLogin() {
     tokenClient.requestAccessToken({ prompt: "consent" });
@@ -83,7 +81,7 @@ window.handleLogin = handleLogin;
 
 
 // ======================
-// GOOGLE CALENDAR EVENTS
+// CALENDAR
 // ======================
 async function listUpcomingEvents() {
 
@@ -127,7 +125,7 @@ async function listUpcomingEvents() {
 
 
 // ======================
-// BALANCE SYSTEM (FIREBASE)
+// BALANCE (FIREBASE)
 // ======================
 
 async function loadBalance() {
@@ -139,7 +137,6 @@ async function loadBalance() {
 
 async function addMoney() {
     const input = parseFloat(document.getElementById("balanceInput").value);
-
     if (isNaN(input)) return;
 
     await changeBalance(input);
@@ -148,7 +145,6 @@ async function addMoney() {
 
 async function removeMoney() {
     const input = parseFloat(document.getElementById("balanceInput").value);
-
     if (isNaN(input)) return;
 
     await changeBalance(-input);
@@ -159,23 +155,20 @@ async function removeMoney() {
 // ======================
 // STARTUP
 // ======================
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
 
     gapiLoaded();
     gisLoaded();
 
-    // login button (always visible initially)
     document.getElementById("loginButton").innerHTML = `
         <button onclick="handleLogin()">Sign in with Google</button>
     `;
 
-    // balance buttons
     const addBtn = document.getElementById("addBtn");
     const removeBtn = document.getElementById("removeBtn");
 
     if (addBtn) addBtn.addEventListener("click", addMoney);
     if (removeBtn) removeBtn.addEventListener("click", removeMoney);
 
-    // load balance safely
-    loadBalance();
+    await loadBalance();
 });
