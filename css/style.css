@@ -154,3 +154,37 @@ h1 {
 .balance-controls button:hover {
     background: #2f6fe0;
 }
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .calendar-window,
+    .balance-window {
+        position: static;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .event-card {
+        width: 100%;
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    #clock {
+        font-size: 2rem;
+    }
+}
+
+.calendar-window,
+.balance-window {
+    max-width: 400px;
+}
