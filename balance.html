@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balance</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="balance.html">Balance</a>
+    </nav>
+
+    <h1>Balance</h1>
+
+    <div class="balance-window">
+
+        <div class="window-header">
+            Balance Tracker
+        </div>
+
+        <div class="window-content">
+
+            <h2 id="balanceAmount">RM 0.00</h2>
+
+            <input
+                type="number"
+                id="amountInput"
+                step="0.01"
+                placeholder="Enter amount">
+
+            <br><br>
+
+            <button id="addBtn">Add</button>
+            <button id="removeBtn">Remove</button>
+
+        </div>
+
+    </div>
+
+    <script type="module" src="js/balance.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Project Dashboard</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="balance.html">Balance</a>
+    </nav>
+
+    <h1>Personal Project</h1>
+
+    <!-- CLOCK -->
+    <div class="clock-container">
+        <h2 id="clock">00:00:00</h2>
+        <p id="date">Loading...</p>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="loginButton"></div>
+
+    <!-- CALENDAR WINDOW -->
+    <div class="calendar-window">
+
+        <div class="window-header">
+            Google Calendar
+        </div>
+
+        <div id="calendarContent" class="window-content">
+            Loading events...
+        </div>
+
+    </div>
+
+    <!-- BALANCE WINDOW -->
+    <div class="balance-window">
+
+        <div class="window-header">
+            Balance
+        </div>
+
+        <div class="balance-display">
+            RM <span id="balanceValue">0.00</span>
+        </div>
+
+        <div class="balance-controls">
+
+            <input type="number" id="balanceInput" step="0.01" placeholder="Enter amount">
+
+            <button id="addBtn">+ Add</button>
+            <button id="removeBtn">- Remove</button>
+
+        </div>
+
+    </div>
+
+    <!-- MODULE SCRIPT -->
+    <script type="module" src="js/main.js"></script>
+
+</body>
+</html>
