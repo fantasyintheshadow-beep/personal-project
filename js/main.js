@@ -59,23 +59,16 @@ function gisLoaded() {
                 return;
             }
 
-            // SAVE TOKEN
+            // store token
             gapi.client.setToken(tokenResponse);
 
-            // hide login button
-            document.getElementById("loginButton").style.display = "none";
+            // hide login button safely
+            const btn = document.getElementById("loginButton");
+            if (btn) btn.style.display = "none";
 
             listUpcomingEvents();
         },
     });
-
-    // 🟢 CHECK IF USER IS ALREADY LOGGED IN
-    const existingToken = gapi.client.getToken();
-
-    if (existingToken) {
-        document.getElementById("loginButton").style.display = "none";
-        listUpcomingEvents();
-    }
 }
 
 
@@ -128,7 +121,8 @@ async function listUpcomingEvents() {
         });
     }
 
-    document.getElementById("calendarContent").innerHTML = html;
+    const container = document.getElementById("calendarContent");
+    if (container) container.innerHTML = html;
 }
 
 
@@ -139,8 +133,8 @@ async function listUpcomingEvents() {
 async function loadBalance() {
     const amount = await getBalance();
 
-    document.getElementById("balanceValue").textContent =
-        amount.toFixed(2);
+    const el = document.getElementById("balanceValue");
+    if (el) el.textContent = amount.toFixed(2);
 }
 
 async function addMoney() {
@@ -170,15 +164,18 @@ window.addEventListener("load", () => {
     gapiLoaded();
     gisLoaded();
 
+    // login button (always visible initially)
     document.getElementById("loginButton").innerHTML = `
         <button onclick="handleLogin()">Sign in with Google</button>
     `;
 
-    document.getElementById("addBtn")
-        .addEventListener("click", addMoney);
+    // balance buttons
+    const addBtn = document.getElementById("addBtn");
+    const removeBtn = document.getElementById("removeBtn");
 
-    document.getElementById("removeBtn")
-        .addEventListener("click", removeMoney);
+    if (addBtn) addBtn.addEventListener("click", addMoney);
+    if (removeBtn) removeBtn.addEventListener("click", removeMoney);
 
+    // load balance safely
     loadBalance();
 });
